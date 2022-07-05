@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx -y tsc",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "prestart": "npm run build && npm run db:reset",
     "predev": "npm run build",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules ./src/server.ts",
@@ -27,6 +27,11 @@
     "sequelize-cli": "^6.4.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/node": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
     "@tsconfig/node14": "^1.0.3",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
