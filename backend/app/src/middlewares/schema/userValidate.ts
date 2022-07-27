@@ -7,4 +7,12 @@ const userValidation = Joi.object().keys({
   password: Joi.string().min(6).max(16).required(),
 });
 
-export default userValidation;
+const login = Joi.object().keys({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).max(16).required(),
+});
+
+export {
+  userValidation,
+  login,
+};
