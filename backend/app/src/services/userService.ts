@@ -1,5 +1,6 @@
 import UserModel from '../models/userModel';
 import bcrypt from 'bcryptjs';
+import NotFoundError from '../middlewares/errors/notFoundError';
 
 export default class UserService {
   private userModel: UserModel;
@@ -10,8 +11,8 @@ export default class UserService {
 
   public createUser = async (name: string, lastName: string, email: string, password: string) => {
     const userExist = await this.userModel.findUser(email);
-
-    if(userExist) throw new Error('user exist');
+    
+    if(userExist) throw new NotFoundError('User already exists!', 404);
 
     const salt = await bcrypt.genSalt(10);
 	  const passwordHash = await bcrypt.hash(password, salt);

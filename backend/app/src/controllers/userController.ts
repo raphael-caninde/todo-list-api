@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import UserService from '../services/userService';
 
 export default class UserController {
@@ -9,7 +9,7 @@ export default class UserController {
   }
 
 
-  public createUser = async (req: Request, res: Response): Promise<Response | void> => {
+  public createUser = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
       const { name, lastName, email, password } = req.body;
 
@@ -17,9 +17,7 @@ export default class UserController {
 
       return res.status(201).json(create);
     } catch (error) {
-      if (error instanceof Error) {
-        return res.status(401).json({ message: error.message });
-      }
+      next(error);
     }
   };
 }
