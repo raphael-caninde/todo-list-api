@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import userRoutes from './routes/userRoutes';
 
 class App {
 
@@ -22,6 +23,8 @@ class App {
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(accessControl);
+
+    this.app.use('/', userRoutes);
   }
 
   private routes():void {
