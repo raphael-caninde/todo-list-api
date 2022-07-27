@@ -14,20 +14,15 @@ services:
     container_name: app_backend
     build: ./backend/app
     restart: 'always'
+    env_file:
+      - ./backend/app/.env
     ports:
-      - "3001:3001"
+      - 3001:3001
     command: npm run dev
     volumes:
       - './backend/app/src:/app/src'
     depends_on:
       - db
-    environment:
-      - PORT=3001
-      - DB_USER=root
-      - DB_PASS=123456
-      - DB_HOST=db
-      - DB_NAME=TRYBE_FUTEBOL_CLUBE
-      - DB_PORT=3306
   db:
     image: mysql
     container_name: db_mysql
