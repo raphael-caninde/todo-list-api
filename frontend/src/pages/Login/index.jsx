@@ -6,6 +6,12 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const checkLogin = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return emailRegex.test(email) && password.length > 6;
+  };
+
   return (
     <div>
       <form>
@@ -34,6 +40,7 @@ function Login() {
         <div>
           <button
             type="submit"
+            disabled={ !checkLogin() }
           >
             ENTRAR
           </button>
@@ -46,7 +53,7 @@ function Login() {
         </div>
       </form>
     </div>
-  )
+  );
 }
 
 export default Login;
