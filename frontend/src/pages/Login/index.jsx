@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AppContext from '../../context/AppContext';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { infoUser: { email, password }, handleChange } = useContext(AppContext);
   const navigate = useNavigate();
 
   const checkLogin = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    return emailRegex.test(email) && password.length > 6;
+    return emailRegex.test(email) && password.length >= 6;
   };
 
   return (
@@ -19,11 +19,12 @@ function Login() {
           <label htmlFor="email">
             <input
               id="email"
-              type="text"
+              type="email"
               className="input-email"
               name="email"
               value={ email }
-              onChange={ ({ target }) => setEmail(target.value) }
+              onChange={ handleChange }
+              required
             />
           </label>
           <label htmlFor="password">
@@ -33,7 +34,8 @@ function Login() {
               className="input-password"
               name="password"
               value={ password }
-              onChange={ ({ target }) => setPassword(target.value) }
+              onChange={ handleChange }
+              required
             />
           </label>
         </div>
