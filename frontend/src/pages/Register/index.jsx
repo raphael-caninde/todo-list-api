@@ -42,6 +42,11 @@ function Register() {
             onChange={ handleChange }
             />
         </div>
+        <button
+          type="submit"
+        >
+          CADASTRAR
+        </button>
       </form>
     </div>
   );
