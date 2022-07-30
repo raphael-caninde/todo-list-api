@@ -13,7 +13,7 @@ export default class UserService {
   public createUser = async (name: string, lastName: string, email: string, password: string) => {
     const userExist = await this.userModel.findUser(email);
 
-    if(userExist) throw new NotFoundError('User already exists!', 400);
+    if(userExist) throw new NotFoundError('Email already exists!', 400);
 
     const salt = await bcrypt.genSalt(10);
 	  const passwordHash = await bcrypt.hash(password, salt);
