@@ -29,16 +29,24 @@ export default class UserService {
   };
 
   public userLogin = async (email: string, password: string) => {
-    const loginExist = await this.userModel.findUser(email);
+    const user = await this.userModel.findUser(email);
 
-    if(!loginExist) throw new NotFoundError('Your email and/or password are invalid', 400);
+    if(!user) throw new NotFoundError('Your email and/or password are invalid', 400);
 
-    const passwordValid = bcrypt.compareSync(password, loginExist.password);
+    const passwordValid = bcrypt.compareSync(password, user.password);
 
     if(!passwordValid) throw new NotFoundError('Your email and/or password are invalid', 400);
 
-    const token = tokenGenerate(loginExist.id, email);
+    const token = tokenGenerate(user.id, email);
 
-    return { token };
+    return {
+      user: {
+        id: user.id,
+        name: user.name,
+        lastName: user.lastName,
+        email: user.email,
+      },
+      token,
+    };
   };
 }
