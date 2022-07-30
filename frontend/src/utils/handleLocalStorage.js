@@ -12,6 +12,7 @@ const localStg = {
 
   remove: {
     token: () => localStorage.removeItem('token'),
+    user: () => localStorage.removeItem('user'),
   }
 }
 
