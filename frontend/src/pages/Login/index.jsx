@@ -1,24 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
-import { requestLogin } from '../../services/userApi';
-import useLocalStorage from '../../hooks/useLocalStorage';
 
 function Login() {
-  const { infoUser: { email, password }, handleChange } = useContext(AppContext);
-  const [token, setToken] = useLocalStorage('token');
+  const { login } = useContext(AppContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const checkLogin = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    return emailRegex.test(email) && password.length >= 6;
-  };
-
-  const login = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data }= await requestLogin({ email, password });
-    setToken(data.token);
+
+    login(email, password)
   };
 
   return (
@@ -33,7 +26,7 @@ function Login() {
               className="input-email"
               name="email"
               value={ email }
-              onChange={ handleChange }
+              onChange={ ({ target }) => setEmail(target.value) }
               required
             />
           </label>
@@ -45,7 +38,7 @@ function Login() {
               className="input-password"
               name="password"
               value={ password }
-              onChange={ handleChange }
+              onChange={ ({ target }) => setPassword(target.value) }
               required
             />
           </label>
@@ -53,8 +46,7 @@ function Login() {
         <div>
           <button
             type="submit"
-            disabled={ !checkLogin() }
-            onClick={ (e) => login(e) }
+            onClick={ (e) => handleSubmit(e) }
           >
             ENTRAR
           </button>
