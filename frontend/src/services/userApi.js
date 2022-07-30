@@ -13,3 +13,9 @@ const headers = {
   const login = await api.post("/login", { email, password }, {headers});
   return login;
 };
+
+export const userRegister = async (data) => {
+  const register = await api.post("/register", data, headers);
+  console.log(register)
+  return register;
+};
