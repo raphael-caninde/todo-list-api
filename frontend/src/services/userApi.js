@@ -15,7 +15,7 @@ const headers = {
 };
 
 export const userRegister = async (data) => {
-  const register = await api.post("/register", data, headers);
-  console.log(register)
+  const register = await api.post("/create", data, headers);
+
   return register;
 };

@@ -21,7 +21,6 @@ function AppProvider({ children }) {
   });
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const token = localStg.get.token();
 
