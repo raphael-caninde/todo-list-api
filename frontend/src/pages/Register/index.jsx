@@ -4,13 +4,15 @@ import AppContext from '../../context/AppContext';
 import { userRegister } from '../../services/userApi';
 
 function Register() {
-  const { infoRegister: { name, lastName, email, password }, handleChange, infoRegister } = useContext(AppContext);
+  const { infoRegister: { name, lastName, email, password }, handleChange, infoRegister, setInfoRegister } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const { request } = await userRegister(infoRegister);
+
+      setInfoRegister({ name: '', lastName:'',  email: '', password: ''})
 
       if (request.status === 201) {
         navigate('/login');

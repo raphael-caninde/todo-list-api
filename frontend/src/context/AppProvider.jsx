@@ -75,6 +75,7 @@ function AppProvider({ children }) {
     logout,
     handleChange,
     loading,
+    setInfoRegister,
   };
 
   return (
