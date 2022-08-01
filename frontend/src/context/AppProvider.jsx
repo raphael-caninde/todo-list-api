@@ -23,9 +23,11 @@ function AppProvider({ children }) {
 
   useEffect(() => {
     const token = localStg.get.token();
+    const user = localStg.get.user()
 
     if (token) {
-      setToken({ token })
+      setToken({ token });
+      setUser(user);
     }
 
     setLoading(false);
