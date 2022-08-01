@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { userRegister } from '../../services/userApi';
+import '../Register/register.css';
 
 function Register() {
   const { infoRegister: { name, lastName, email, password }, handleChange, infoRegister, setInfoRegister } = useContext(AppContext);
@@ -26,59 +27,70 @@ function Register() {
   };
 
   return (
-    <div>
-      <span
-        onClick={ () => navigate('/login') }
-      >
-        Login
-      </span>
-      <h3>Faça seu cadastro</h3>
-      <form>
+    <div className="container-register">
+      <header className="header">
         <div>
-          <label htmlFor="name">Nome</label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            value={ name }
-            onChange={ handleChange }
-            required
-            />
-          <label htmlFor="lastName">sobrenome</label>
-          <input
-            id="lastName"
-            type="text"
-            name="lastName"
-            value={ lastName }
-            onChange={ handleChange }
-            required
-            />
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={ email }
-            onChange={ handleChange }
-            required
-          />
-          <label htmlFor="password">Senha</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={ password }
-            onChange={ handleChange }
-            required
-            />
+          <span
+            className="login"
+            onClick={ () => navigate('/login') }
+          >
+          ⇦ Login
+          </span>
         </div>
-        <button
-          type="submit"
-          onClick={ (e) => handleRegister(e) }
-        >
-          CADASTRAR
-        </button>
-      </form>
+        <h3>Faça seu cadastro</h3>
+      </header>
+      <div className="container-body">
+        <form className="register-form">
+          <div className="register-inputs">
+            <label htmlFor="name">Nome</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              className=""
+              value={ name }
+              onChange={ handleChange }
+              required
+              />
+            <label htmlFor="lastName">Sobrenome</label>
+            <input
+              id="lastName"
+              type="text"
+              name="lastName"
+              value={ lastName }
+              onChange={ handleChange }
+              required
+              />
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value={ email }
+              onChange={ handleChange }
+              required
+            />
+            <label htmlFor="password">Senha</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value={ password }
+              onChange={ handleChange }
+              required
+              />
+          </div>
+          <div className="container-btn">
+            <button
+              className="btn-register"
+              type="submit"
+              onClick={ (e) => handleRegister(e) }
+            >
+              CADASTRAR
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
