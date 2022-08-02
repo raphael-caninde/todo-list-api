@@ -42,7 +42,7 @@ function Register() {
       <div className="container-body">
         <form className="register-form">
           <div className="register-inputs">
-            <label htmlFor="name">Nome</label>
+            <label htmlFor="name">NOME</label>
             <input
               id="name"
               type="text"
@@ -52,7 +52,7 @@ function Register() {
               onChange={ handleChange }
               required
               />
-            <label htmlFor="lastName">Sobrenome</label>
+            <label htmlFor="lastName">SOBRENOME</label>
             <input
               id="lastName"
               type="text"
@@ -61,7 +61,7 @@ function Register() {
               onChange={ handleChange }
               required
               />
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">EMAIL</label>
             <input
               id="email"
               type="email"
@@ -70,7 +70,7 @@ function Register() {
               onChange={ handleChange }
               required
             />
-            <label htmlFor="password">Senha</label>
+            <label htmlFor="password">SENHA</label>
             <input
               id="password"
               type="password"
