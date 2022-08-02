@@ -17,7 +17,7 @@
 # Iniciando o projeto no Docker
  
   - Navegue pelo terminal da pasta raiz do projeto para a pasta backend/app
-  - Digite o comando npm run compose:up:dev
+  - Digite o comando 'npm run compose:up:dev'
   - O comando acima iniciara o arquivo docker compose que se encontra na raiz do projeto, e ira subir
   a aplicação frontend, backend, e o banco de dados ja executando a migração das tabelas.
   - Por padrão o frontend esta executando na porta 3000, o backend na porta 3001 e o banco de dados na porta 3306
