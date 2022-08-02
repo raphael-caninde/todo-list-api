@@ -25,5 +25,6 @@
   
 ⚠️**Atenção:**
   - Na pasta Backend/app no aquivo .env.exemple mudar o nome para .env
-  - No arquivo vai ter 2 variaveis de ambiente do banco de dados para executar localmente ou pelo docker
-  - Basta mudar no arquivo backend/prisma/schema.prisma a viriavel.
+  - No arquivo vai ter 2 variáveis de ambiente do banco de dados para executar localmente ou pelo docker,
+  não esqueça de colocar o username e o password do seu banco de dados na variável, em sequida basta mudar 
+  no arquivo backend/prisma/schema.prisma a viriável.
