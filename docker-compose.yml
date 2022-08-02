@@ -22,6 +22,7 @@ services:
     depends_on:
       - db
   db:
+    container_name: mysql
     image: mysql
     restart: "always"
     ports:
