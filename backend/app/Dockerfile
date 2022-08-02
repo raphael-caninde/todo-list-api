@@ -4,6 +4,7 @@ EXPOSE 3001
 
 WORKDIR /app
 
+COPY ./prisma prisma
 COPY package*.json ./
 
 RUN npm install
