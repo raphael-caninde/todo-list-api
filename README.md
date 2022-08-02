@@ -14,7 +14,7 @@
  - Digite npm run dev para iniciar o projeto localmente
  - Por padrão, o projeto será executado na porta 3001
  
-# Iniciando o projeto no Docker
+# Iniciando o projeto no Docker 🐳
  
   - Navegue pelo terminal da pasta raiz do projeto para a pasta backend/app
   - Digite o comando 'npm run compose:up:dev'
