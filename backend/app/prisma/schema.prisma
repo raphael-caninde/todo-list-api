@@ -13,14 +13,14 @@ model User {
   lastName  String @map("last_name")
   password  String
   email     String @unique
-  todo TodoList[]
+  list      TodoList[]
 
   @@map("users")
 }
 
 model TodoList {
   id      Int     @id  @default(autoincrement())
-  name    String
+  task    String
   user    User    @relation(fields: [userId], references: [id])
   userId  Int     @map("user_id")
 

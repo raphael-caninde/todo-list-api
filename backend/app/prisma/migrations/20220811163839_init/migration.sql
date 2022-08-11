@@ -13,7 +13,7 @@ CREATE TABLE `users` (
 -- CreateTable
 CREATE TABLE `todo_list` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NOT NULL,
+    `task` VARCHAR(191) NOT NULL,
     `user_id` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)

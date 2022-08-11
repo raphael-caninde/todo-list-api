@@ -12,12 +12,12 @@ export default class TodoListModel {
       where: { id },
       select: {
         name: true,
-        todo: {
+        list: {
           select: {
-            name: true,
-          }
-        }
-      }
+            task: true,
+          },
+        },
+      },
     });
 
     return list;

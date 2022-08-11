@@ -1,13 +1,9 @@
 import { Router } from 'express';
-import todoListModel from '../models/todoListModel';
+import todoListController from '../controllers/todoListController';
 
 const router = Router();
-const listModel = new todoListModel();
+const listConttroller = new todoListController();
 
-router.get('/list/:id', async (req, res) => {
-  const { id } = req.params;
-  const get = await listModel.getList(+id);
-  return res.status(200).json(get);
-})
+router.get('/list/:id', listConttroller.getList);
 
 export default router;

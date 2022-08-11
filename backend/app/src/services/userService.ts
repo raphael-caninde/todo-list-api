@@ -1,6 +1,6 @@
 import UserModel from '../models/userModel';
 import bcrypt from 'bcryptjs';
-import NotFoundError from '../middlewares/errors/notFoundError';
+import NotFoundError from '../middlewares/errors/Error';
 import { tokenGenerate } from '../utils/token';
 
 export default class UserService {
