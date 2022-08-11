@@ -10,7 +10,19 @@ datasource db {
 model User {
   id        Int    @id  @default(autoincrement())
   name      String
-  lastName  String
+  lastName  String @map("last_name")
   password  String
   email     String @unique
+  todo TodoList[]
+
+  @@map("users")
+}
+
+model TodoList {
+  id      Int     @id  @default(autoincrement())
+  name    String
+  user    User    @relation(fields: [userId], references: [id])
+  userId  Int     @map("user_id")
+
+  @@map("todo_list")
 }

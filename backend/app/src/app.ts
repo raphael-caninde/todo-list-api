@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes';
+import listRouter from './routes/todoListRoutes';
 import errorMiddleware from './middlewares/errorMiddleware';
 
 class App {
@@ -26,6 +27,7 @@ class App {
     this.app.use(accessControl);
 
     this.app.use('/', userRoutes);
+    this.app.use('/', listRouter);
     this.app.use(errorMiddleware);
   }
 
