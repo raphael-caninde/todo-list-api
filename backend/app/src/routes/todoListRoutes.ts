@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import todoListController from '../controllers/todoListController';
+import TodoListController from '../controllers/todoListController';
 
 const router = Router();
-const listConttroller = new todoListController();
+const listConttroller = new TodoListController();
 
 router.get('/list/:id', listConttroller.getList);
+
+router.post('/create-task/:id', listConttroller.createTask);
 
 export default router;

@@ -6,7 +6,7 @@ export default class TodoListService {
 
   constructor() {
     this.todoListModel = new TodoListModel();
-  }
+  };
 
   public getList = async (id: number) => {
     const list = await this.todoListModel.getList(id);
@@ -14,5 +14,11 @@ export default class TodoListService {
     if(list === null) throw new Error('User not found!', 404);
 
     return list;
-  }
+  };
+
+  public createTask = async (id: number, task: string) => {
+    const newTask = await this.todoListModel.createTask(id, task);
+
+    return newTask;
+  };
 }

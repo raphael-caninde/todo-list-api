@@ -6,7 +6,7 @@ export default class TodoListController {
 
   constructor() {
     this.todoListService = new TodoListService();
-  }
+  };
 
   public getList = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
@@ -15,6 +15,19 @@ export default class TodoListController {
       const list = await this.todoListService.getList(+id);
 
       return res.status(200).json(list);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public createTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+    try {
+      const { task } = req.body;
+      const { id } = req.params;
+
+      const newTask = await this.todoListService.createTask(+id, task);
+
+      return res.status(201).json(newTask);
     } catch (error) {
       next(error);
     }
