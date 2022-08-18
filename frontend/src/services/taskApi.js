@@ -9,8 +9,8 @@ const headers = {
   'Access-Control-Allow-Origin': '*',
 };
 
-export const getTaks = async () => {
-  const tasks = await axios.get('/list', { headers });
+export const getTasks = async (id) => {
+  const tasks = await axios.get('/list', { id }, { headers });
 
   return tasks;
 };
