@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import Error from '../middlewares/errors/Error';
 
 export default class TodoListModel {
   private prisma: PrismaClient;

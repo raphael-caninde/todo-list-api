@@ -11,7 +11,6 @@ class App {
   constructor() {
     this.app = express();
     this.config();
-    this.routes();
   }
 
   private config():void {
@@ -29,10 +28,6 @@ class App {
     this.app.use('/', userRoutes);
     this.app.use('/', listRouter);
     this.app.use(errorMiddleware);
-  }
-
-  private routes():void {
-
   }
 
   public start(PORT: string | number):void {

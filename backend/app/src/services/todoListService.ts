@@ -1,5 +1,5 @@
 import TodoListModel from '../models/todoListModel';
-import Error from '../middlewares/errors/Error';
+import { NotFoundError } from '../middlewares/errors/ApiErrors';
 
 export default class TodoListService {
   private todoListModel: TodoListModel;
@@ -11,7 +11,7 @@ export default class TodoListService {
   public getList = async (id: number) => {
     const list = await this.todoListModel.getList(id);
 
-    if(list === null) throw new Error('User not found!', 404);
+    if(list === null) throw new NotFoundError('User not found!');
 
     return list;
   };
