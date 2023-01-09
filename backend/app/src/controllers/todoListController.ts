@@ -32,4 +32,17 @@ export default class TodoListController {
       next(error);
     }
   };
+
+  public updateTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+    try {
+      const { taskId, task } = req.body;
+      console.log("controller:" + " " + taskId, task);
+
+      const upTask = await this.todoListService.updateTask(taskId, task);
+
+      return res.status(200).json(upTask);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

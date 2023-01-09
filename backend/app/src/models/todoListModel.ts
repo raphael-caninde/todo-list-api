@@ -33,4 +33,15 @@ export default class TodoListModel {
 
     return {newTask};
   };
+
+  public updateTask = async (taskId: number, task: string) => {
+    const upTask = await this.prisma.todoList.update({
+      where: {id: taskId},
+      data: {
+        task: task,
+      },
+    });
+    console.log(upTask);
+    return upTask;
+  };
 }
