@@ -8,4 +8,6 @@ router.get('/list/:id', listConttroller.getList);
 
 router.post('/create-task/:id', listConttroller.createTask);
 
+router.patch('/update-task', listConttroller.updateTask);
+
 export default router;
