@@ -23,7 +23,6 @@ export default class TodoListService {
   };
 
   public updateTask = async (taskId: number, task: string) => {
-    console.log("service:" + " " + taskId, task);
     const upTask = await this.todoListModel.updateTask(taskId, task);
 
 

@@ -36,7 +36,6 @@ export default class TodoListController {
   public updateTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
       const { taskId, task } = req.body;
-      console.log("controller:" + " " + taskId, task);
 
       const upTask = await this.todoListService.updateTask(taskId, task);
 

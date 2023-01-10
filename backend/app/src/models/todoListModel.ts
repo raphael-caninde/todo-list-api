@@ -41,7 +41,7 @@ export default class TodoListModel {
         task: task,
       },
     });
-    console.log(upTask);
+  
     return upTask;
   };
 }
