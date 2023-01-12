@@ -1,8 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes';
-import listRouter from './routes/todoListRoutes';
+import taskRoutes from './routes/todoListRoutes';
 import errorMiddleware from './middlewares/errorMiddleware';
+import 'dotenv/config';
 
 class App {
 
@@ -25,8 +26,8 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
 
-    this.app.use('/', userRoutes);
-    this.app.use('/', listRouter);
+    this.app.use('/user', userRoutes);
+    this.app.use('/task', taskRoutes);
     this.app.use(errorMiddleware);
   }
 
