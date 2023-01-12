@@ -14,6 +14,7 @@ export default class TodoListModel {
         name: true,
         list: {
           select: {
+            id: true,
             task: true,
           },
         },
@@ -41,7 +42,17 @@ export default class TodoListModel {
         task: task,
       },
     });
-    
+
     return upTask;
+  };
+
+  public deleteTask = async (taskId: number) => {
+    const removeTask = await this.prisma.todoList.deleteMany({
+      where: {
+        id: taskId,
+      }
+    });
+
+    return removeTask;
   };
 }

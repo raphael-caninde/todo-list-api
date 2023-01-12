@@ -22,10 +22,9 @@ export default class TodoListController {
 
   public createTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
-      const { task } = req.body;
-      const { id } = req.params;
+      const { id, task } = req.body;
 
-      const newTask = await this.todoListService.createTask(+id, task);
+      const newTask = await this.todoListService.createTask(id, task);
 
       return res.status(201).json(newTask);
     } catch (error) {
@@ -40,6 +39,18 @@ export default class TodoListController {
       const upTask = await this.todoListService.updateTask(taskId, task);
 
       return res.status(200).json(upTask);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public deleteTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+    try {
+      const { taskId } = req.body;
+
+      await this.todoListService.deleteTask(taskId);
+
+      return res.status(200);
     } catch (error) {
       next(error);
     }

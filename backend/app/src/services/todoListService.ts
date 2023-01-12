@@ -28,4 +28,11 @@ export default class TodoListService {
 
     return upTask;
   }
+
+  public deleteTask = async (taskId: number) => {
+    const removeTask = await this.todoListModel.deleteTask(taskId);
+    console.log(removeTask);
+
+    return removeTask;
+  }
 }
