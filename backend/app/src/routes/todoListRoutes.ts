@@ -2,12 +2,14 @@ import { Router } from 'express';
 import TodoListController from '../controllers/todoListController';
 
 const router = Router();
-const listConttroller = new TodoListController();
+const taskConttroller = new TodoListController();
 
-router.get('/list/:id', listConttroller.getList);
+router.get('/:id', taskConttroller.getList);
 
-router.post('/create-task/:id', listConttroller.createTask);
+router.post('/', taskConttroller.createTask);
 
-router.patch('/update-task', listConttroller.updateTask);
+router.patch('/', taskConttroller.updateTask);
+
+router.delete('/', taskConttroller.deleteTask);
 
 export default router;
