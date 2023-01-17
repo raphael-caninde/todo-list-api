@@ -10,9 +10,9 @@ export default class TodoListController {
 
   public getList = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
-      const { id } = req.params;
+      const id = req.user!.id;
 
-      const list = await this.todoListService.getList(+id);
+      const list = await this.todoListService.getList(id);
 
       return res.status(200).json(list);
     } catch (error) {
@@ -50,7 +50,7 @@ export default class TodoListController {
 
       await this.todoListService.deleteTask(taskId);
 
-      return res.status(200);
+      return res.status(200).json();
     } catch (error) {
       next(error);
     }

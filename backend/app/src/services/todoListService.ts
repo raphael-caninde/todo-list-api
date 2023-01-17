@@ -11,8 +11,6 @@ export default class TodoListService {
   public getList = async (id: number) => {
     const list = await this.todoListModel.getList(id);
 
-    if(list === null) throw new NotFoundError('User not found!');
-
     return list;
   };
 
@@ -23,6 +21,10 @@ export default class TodoListService {
   };
 
   public updateTask = async (taskId: number, task: string) => {
+    const getTask = await this.todoListModel.findtask(taskId);
+
+    if(!getTask) throw new NotFoundError('Task not found!');
+
     const upTask = await this.todoListModel.updateTask(taskId, task);
 
 
@@ -30,8 +32,14 @@ export default class TodoListService {
   }
 
   public deleteTask = async (taskId: number) => {
+    const task = await this.todoListModel.findtask(taskId);
+
+    if(!task) throw new NotFoundError('Task not found!');
+
     const removeTask = await this.todoListModel.deleteTask(taskId);
-    console.log(removeTask);
+
+
+    console.log(removeTask + 'service');
 
     return removeTask;
   }

@@ -1,19 +1,36 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-dotenv.config();
+import { PrismaClient } from '@prisma/client';
+import { UnauthorizedError } from './errors/ApiErrors';
+
+type JwtPayload = {
+	id: number;
+  callback: (error: Error) => void;
+}
+
+const prisma = new PrismaClient();
 
 const checkToken = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization;
+    const accessToken = req.headers.authorization;
 
-    if (!token) return res.status(401).json({ message: 'Token not found' });
+    if (!accessToken) return res.status(401).json({ message: 'Token not found' });
 
-    jwt.verify(token, process.env.JWT_SECRET as string, (error, _decoded) => {
-      if (error) {
-        return res.status(401).json({ message: error.message });
-      }
+    const [, token] = accessToken.split(' ');
+
+    const { id } = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id
+      },
     });
+
+    //console.log(user);
+
+    if (!user) throw new UnauthorizedError('User not found');
+
+    req.user = user;
 
     next();
   } catch (error) {
@@ -21,4 +38,4 @@ const checkToken = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-module.exports = checkToken;
+export default checkToken;

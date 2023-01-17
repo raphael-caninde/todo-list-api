@@ -45,8 +45,8 @@ export default class UserService {
         name: user.name,
         lastName: user.lastName,
         email: user.email,
-      },
-      token,
+        token
+      }
     };
   };
 }

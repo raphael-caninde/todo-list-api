@@ -55,4 +55,14 @@ export default class TodoListModel {
 
     return removeTask;
   };
+
+  public findtask = async (taskId: number) => {
+    const task = await this.prisma.todoList.findFirst({
+      where: {
+        id: taskId
+      }
+    });
+
+    return task;
+  };
 }
