@@ -38,9 +38,6 @@ export default class TodoListService {
 
     const removeTask = await this.todoListModel.deleteTask(taskId);
 
-
-    console.log(removeTask + 'service');
-
     return removeTask;
   }
 }

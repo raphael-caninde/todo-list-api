@@ -5,7 +5,6 @@ import { UnauthorizedError } from './errors/ApiErrors';
 
 type JwtPayload = {
 	id: number;
-  callback: (error: Error) => void;
 }
 
 const prisma = new PrismaClient();
@@ -25,8 +24,6 @@ const checkToken = async (req: Request, res: Response, next: NextFunction) => {
         id
       },
     });
-
-    //console.log(user);
 
     if (!user) throw new UnauthorizedError('User not found');
 
