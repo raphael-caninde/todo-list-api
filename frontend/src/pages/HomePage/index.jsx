@@ -1,26 +1,11 @@
-import React, { useContext } from 'react';
-import AppContext from '../../context/AppContext';
-import FormTodoList from '../../components/FormTodoList';
-import '../HomePage/homePage.css';
+import { FormTodoList } from '../../components/FormTodoList';
+import { Header } from '../../components/Header';
 
-function HomePage() {
-  const { logout, user: { name, lastName } } = useContext(AppContext);
-
+export function HomePage() {
   return (
     <div>
-      <header className="header-home">
-        <h1>Welcome { `${name} ${lastName} !` }</h1>
-          <button
-            type="button"
-            onClick={ logout }
-          >
-            SAIR
-          </button>
-      </header>
-
+      <Header />
       <FormTodoList />
     </div>
   )
 }
-
-export default HomePage;
