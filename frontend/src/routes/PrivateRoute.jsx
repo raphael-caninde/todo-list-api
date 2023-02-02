@@ -1,23 +1,34 @@
-import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import { localStg } from '../utils/handleLocalStorage';
+import { api } from '../services/taskApi';
 
-function PrivateRoute({ children }) {
+export function PrivateRoute({ children }) {
+  const navigate = useNavigate();
+  const { isAuthenticated, loading, setToken, setUser, setLoading } = useContext(AppContext);
 
-  const Private = () => {
-    const { isAuthenticated, loading } = useContext(AppContext);
+  useEffect(() => {
+    const user = localStg.get.user();
+    const token = localStg.get.token();
 
-    if (loading) {
-      return <div>Carregando...</div>
+    if (token && user) {
+      setUser(user);
+      setToken(token);
+      api.defaults.headers.Authorization = `Bearer ${token}`;
     }
 
-    if (!isAuthenticated) {
-      return <Navigate  to="/login" />;
-    }
-    return children;
-  };
+    setLoading(false);
 
-  return Private();
+  }, [setLoading, setToken, setUser]);
+
+  if (loading) {
+    return <div>Carregando...</div>
+  }
+
+  if (!isAuthenticated) {
+    return navigate('/login');
+  }
+
+  return children;
 };
-
-export default PrivateRoute;
