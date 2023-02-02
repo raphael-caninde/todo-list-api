@@ -10,13 +10,13 @@ const headers = {
 };
 
 export const getTasks = async (id) => {
-  const tasks = await axios.get('/list', { id }, { headers });
+  const tasks = await axios.get('/task', { id }, { headers });
 
   return tasks;
 };
 
 export const createTask = async (data) => {
-  const task = await axios.post('/create-task', data, { headers });
+  const task = await axios.post('/task', data, { headers });
 
   return task;
 };

@@ -10,13 +10,13 @@ const headers = {
 };
 
  export const requestLogin = async ({email, password}) => {
-  const login = await api.post("/login", { email, password }, { headers });
+  const login = await api.post("/user/login", { email, password }, { headers });
 
   return login;
 };
 
 export const userRegister = async (data) => {
-  const register = await api.post("/create", data, { headers });
+  const register = await api.post("/user/create", data, { headers });
 
   return register;
 };

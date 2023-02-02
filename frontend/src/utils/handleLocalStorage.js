@@ -1,4 +1,4 @@
-const localStg = {
+export const localStg = {
   set: {
     token: (token) => localStorage.setItem('token', JSON.stringify(token)),
     user: (user) => localStorage.setItem('user', JSON.stringify(user)),
@@ -15,5 +15,3 @@ const localStg = {
     user: () => localStorage.removeItem('user'),
   }
 }
-
-export default localStg;
