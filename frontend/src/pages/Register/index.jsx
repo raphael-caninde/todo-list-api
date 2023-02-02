@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { userRegister } from '../../services/userApi';
-import '../Register/register.css';
 
-function Register() {
+export function Register() {
   const { infoRegister: { name, lastName, email, password }, handleChange, infoRegister, setInfoRegister } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     try {
       const { request } = await userRegister(infoRegister);
 
@@ -94,5 +94,3 @@ function Register() {
     </div>
   );
 };
-
-export default Register;

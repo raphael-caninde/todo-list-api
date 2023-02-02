@@ -1,13 +1,38 @@
 import React, { useContext, useState } from 'react';
+import { localStg } from '../../utils/handleLocalStorage';
 import { useNavigate } from 'react-router-dom';
+import { api, requestLogin } from '../../services/userApi';
 import AppContext from '../../context/AppContext';
-import './login.css';
 
-function Login() {
-  const { login } = useContext(AppContext);
+export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const {setToken, setUser} = useContext(AppContext);
   const navigate = useNavigate();
+
+  const login = async (email, password) => {
+    try {
+      const { data } = await requestLogin({ email, password });
+
+      const loggedUser = data.user;
+      const token = data.user.token
+
+      api.defaults.headers.Authorization = `Bearer ${data.user.token}`;
+
+      localStg.set.user(loggedUser);
+      localStg.set.token(token);
+
+      setToken({ token });
+      setUser(loggedUser);
+
+      navigate('/home');
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message)
+      }
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +66,7 @@ function Login() {
             required
             placeholder=" "
           />
+          {error && <span>{error}</span>}
         </div>
         <div className="container-btns">
           <button
@@ -62,5 +88,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

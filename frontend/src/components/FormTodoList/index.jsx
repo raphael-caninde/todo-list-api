@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ListItem from '../ListItem';
+import { ListTasks } from '../ListTasks';
 
-function FormTodoList() {
+export function FormTodoList() {
   const [text, setText] = useState('');
 
   return (
@@ -16,14 +16,12 @@ function FormTodoList() {
         />
         <button
           type="button"
-          onClick={ () => console.log(text)}
+          //onClick={}
         >
           ADICIONAR
         </button>
       </div>
-      <ListItem />
+      <ListTasks />
     </div>
   );
 }
-
-export default FormTodoList;
