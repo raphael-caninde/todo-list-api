@@ -1,22 +1,13 @@
-import axios from 'axios';
+import { api } from "./axiosService";
 
-export const api = axios.create({
-  baseURL: "http://localhost:3001",
-});
-
-const headers = {
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-};
-
-export const getTasks = async (id) => {
-  const tasks = await axios.get('/task', { id }, { headers });
-
+export const getTasks = async () => {
+  const tasks = await api.get('/task');
+  console.log('api task', tasks);
   return tasks;
 };
 
 export const createTask = async (data) => {
-  const task = await axios.post('/task', data, { headers });
+  const task = await api.post('/task', data);
 
   return task;
 };
