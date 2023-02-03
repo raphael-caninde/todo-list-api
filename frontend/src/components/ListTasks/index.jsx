@@ -1,22 +1,34 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getTasks } from '../../services/taskApi';
-import AppContext from '../../context/AppContext';
 
 export function ListTasks() {
-  const { user: { id } } = useContext(AppContext);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const task = await getTasks();
+      const allTasks = await getTasks();
 
-      setTasks(task);
+      setTasks(allTasks);
     })()
-  });
+  }, []);
+
+  console.log('lista de tarefas: ', tasks)
 
   return (
     <div>
-      {}
+     {/*  {tasks === undefined ?
+        <span>Adicione uma tarefa</span> :
+        tasks.map(task => {
+            return (
+              <div>
+                <div>
+                  {task}
+                </div>
+              </div>
+            )
+          }
+        )
+      } */}
     </div>
   );
 };

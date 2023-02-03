@@ -2,7 +2,7 @@ import { api } from "./axiosService";
 
 export const getTasks = async () => {
   const tasks = await api.get('/task');
-  console.log('api task', tasks);
+
   return tasks;
 };
 

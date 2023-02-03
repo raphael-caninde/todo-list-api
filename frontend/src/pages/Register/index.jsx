@@ -1,19 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AppContext from '../../context/AppContext';
 import { userRegister } from '../../services/userApi';
 
 export function Register() {
-  const { infoRegister: { name, lastName, email, password }, handleChange, infoRegister, setInfoRegister } = useContext(AppContext);
   const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    try {
-      const { request } = await userRegister(infoRegister);
+    const dataUser = {name, lastName, email, password};
 
-      setInfoRegister({ name: '', lastName:'',  email: '', password: ''})
+    try {
+      const { request } = await userRegister(dataUser);
 
       if (request.status === 201) {
         navigate('/login');
@@ -27,8 +30,8 @@ export function Register() {
   };
 
   return (
-    <div className="container-register">
-      <header className="header">
+    <div>
+      <header>
         <div>
           <span
             className="login"
@@ -39,17 +42,16 @@ export function Register() {
         </div>
         <h3>Faça seu cadastro</h3>
       </header>
-      <div className="container-body">
-        <form className="register-form">
-          <div className="register-inputs">
+      <div>
+        <form>
+          <div>
             <label htmlFor="name">NOME</label>
             <input
               id="name"
               type="text"
               name="name"
-              className=""
               value={ name }
-              onChange={ handleChange }
+              onChange={ ({ target }) => setName(target.value) }
               required
               />
             <label htmlFor="lastName">SOBRENOME</label>
@@ -58,7 +60,7 @@ export function Register() {
               type="text"
               name="lastName"
               value={ lastName }
-              onChange={ handleChange }
+              onChange={ ({ target }) => setLastName(target.value) }
               required
               />
             <label htmlFor="email">EMAIL</label>
@@ -67,7 +69,7 @@ export function Register() {
               type="email"
               name="email"
               value={ email }
-              onChange={ handleChange }
+              onChange={ ({ target }) => setEmail(target.value) }
               required
             />
             <label htmlFor="password">SENHA</label>
@@ -76,7 +78,7 @@ export function Register() {
               type="password"
               name="password"
               value={ password }
-              onChange={ handleChange }
+              onChange={ ({ target }) => setPassword(target.value) }
               required
               />
           </div>

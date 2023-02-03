@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import AppContext from '../../context/AppContext';
 import { localStg } from '../../utils/handleLocalStorage';
-import { api } from '../../services/userApi';
+import { api } from '../../services/axiosService';
 import { useNavigate } from 'react-router-dom';
 
 export function Header() {
@@ -19,7 +19,7 @@ export function Header() {
 
   return (
     <header className="">
-      <h1>Welcome { `${name} ${lastName} !` }</h1>
+      <h1>{ `${name} ${lastName}` }</h1>
         <button
           type="button"
           onClick={ () => logout() }

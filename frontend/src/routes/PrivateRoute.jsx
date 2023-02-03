@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import { localStg } from '../utils/handleLocalStorage';
-import { api } from '../services/taskApi';
+import { api } from '../services/axiosService';
 
 export function PrivateRoute({ children }) {
   const navigate = useNavigate();
@@ -15,7 +15,9 @@ export function PrivateRoute({ children }) {
     if (token && user) {
       setUser(user);
       setToken(token);
-      api.defaults.headers.Authorization = `Bearer ${token}`;
+
+      api.defaults.headers.Authorization = `Bearer ${user.token}`;
+
     }
 
     setLoading(false);

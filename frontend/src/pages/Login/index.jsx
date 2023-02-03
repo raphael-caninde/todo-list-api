@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { localStg } from '../../utils/handleLocalStorage';
 import { useNavigate } from 'react-router-dom';
-import { api, requestLogin } from '../../services/userApi';
+import { requestLogin } from '../../services/userApi';
 import AppContext from '../../context/AppContext';
+import { api } from '../../services/axiosService';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -18,13 +19,13 @@ export function Login() {
       const loggedUser = data.user;
       const token = data.user.token
 
-      api.defaults.headers.Authorization = `Bearer ${data.user.token}`;
-
       localStg.set.user(loggedUser);
       localStg.set.token(token);
 
-      setToken({ token });
+      setToken(token);
       setUser(loggedUser);
+
+      api.defaults.headers.Authorization = `Bearer ${data.user.token}`;
 
       navigate('/home');
     } catch (error) {

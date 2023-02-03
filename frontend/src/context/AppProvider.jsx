@@ -10,25 +10,12 @@ function AppProvider({ children }) {
   });
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [infoRegister, setInfoRegister] = useState({
-    name: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
-
-   const handleChange = ({ target: { value, name } }) => {
-    setInfoRegister({ ...infoRegister, [name]: value })
-  };
 
   const data = {
     user,
-    isAuthenticated: !!token,
-    infoRegister,
-    handleChange,
-    loading,
     token,
-    setInfoRegister,
+    isAuthenticated: !!token,
+    loading,
     setLoading,
     setToken,
     setUser,
