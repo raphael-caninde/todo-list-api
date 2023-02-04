@@ -1,11 +1,11 @@
-import { FormTodoList } from '../../components/FormTodoList';
+import { TodoList } from '../../components/TodoList';
 import { Header } from '../../components/Header';
 
 export function HomePage() {
   return (
     <div>
       <Header />
-      <FormTodoList />
+      <TodoList />
     </div>
   )
 }
