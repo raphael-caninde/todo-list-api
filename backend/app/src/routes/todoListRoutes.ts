@@ -7,7 +7,7 @@ const taskConttroller = new TodoListController();
 
 router.get('/', checkToken, taskConttroller.getList);
 
-router.post('/', taskConttroller.createTask);
+router.post('/', checkToken, taskConttroller.createTask);
 
 router.patch('/', taskConttroller.updateTask);
 
