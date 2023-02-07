@@ -11,6 +11,6 @@ router.post('/', checkToken, taskConttroller.createTask);
 
 router.patch('/', taskConttroller.updateTask);
 
-router.delete('/', taskConttroller.deleteTask);
+router.delete('/:id', checkToken, taskConttroller.deleteTask);
 
 export default router;

@@ -47,9 +47,9 @@ export default class TodoListController {
 
   public deleteTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
-      const { taskId } = req.body;
+      const { id } = req.params;
 
-      await this.todoListService.deleteTask(taskId);
+      await this.todoListService.deleteTask(+id);
 
       return res.status(200).json();
     } catch (error) {

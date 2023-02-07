@@ -4,7 +4,9 @@ export default class TodoListModel {
   private prisma: PrismaClient;
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = new PrismaClient({
+      log: ['query'],
+    });
   }
 
   public getList = async (id: number) => {
@@ -47,7 +49,7 @@ export default class TodoListModel {
   };
 
   public deleteTask = async (taskId: number) => {
-    const removeTask = await this.prisma.todoList.deleteMany({
+    const removeTask = await this.prisma.todoList.delete({
       where: {
         id: taskId,
       }
