@@ -15,13 +15,14 @@ export function TodoList() {
   );
 
   function notifyAdded() {
-    toast.success("task add!", {
+    toast.success("task added!", {
       icon: true,
       theme: "dark",
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 1000,
     });
   }
+
   function notifyDeleted() {
     toast.error("task deleted!", {
       icon: true,
