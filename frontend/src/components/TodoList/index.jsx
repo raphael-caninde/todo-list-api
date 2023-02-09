@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { getTasks, createTask, removeTask } from '../../services/taskApi';
 import { useQuery, useMutation, useQueryClient} from 'react-query'
-import { FiTrash2 } from 'react-icons/fi';
-import 'react-toastify/dist/ReactToastify.css'
+import { FiTrash2, FiEdit } from 'react-icons/fi';
+import { ModalEditTask } from '../ModalEditTask';
 
 export function TodoList() {
   const [inputText, setInputText] = useState('');
+  const [isOpenModal, setIsOpenModal] = useState({
+    open: false,
+    id: null
+  });
 
   const queryClient = useQueryClient();
 
@@ -32,6 +36,10 @@ export function TodoList() {
     });
   }
 
+  async function handleDeleteTask (id) {
+    await removeTask(id);
+  }
+
   const { mutate: handleCreateTask } = useMutation(async () => {
     try {
       await createTask(inputText);
@@ -43,10 +51,6 @@ export function TodoList() {
       notifyAdded()
     }
   })
-
-  async function handleDeleteTask (id) {
-    await removeTask(id);
-  }
 
   const { mutate: deleteTask } = useMutation(handleDeleteTask, {
       onSuccess: () => {
@@ -86,7 +90,14 @@ export function TodoList() {
                 <li>
                   {task.task}
                 </li>
-                <FiTrash2 onClick={() => deleteTask(task.id)} />
+                <FiEdit
+                  onClick={() => {
+                    setIsOpenModal({ open: true, id: task.id })
+                  }}
+                />
+                <FiTrash2
+                  onClick={() => deleteTask(task.id)}
+                />
               </div>
             )
           }) :
@@ -94,7 +105,10 @@ export function TodoList() {
           }
         </ul>
       </div>
-      <ToastContainer />
+      <ModalEditTask
+        openModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+      />
     </div>
   );
 }

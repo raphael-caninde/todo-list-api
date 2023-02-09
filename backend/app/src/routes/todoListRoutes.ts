@@ -9,7 +9,7 @@ router.get('/', checkToken, taskConttroller.getList);
 
 router.post('/', checkToken, taskConttroller.createTask);
 
-router.patch('/', taskConttroller.updateTask);
+router.patch('/:id',checkToken, taskConttroller.updateTask);
 
 router.delete('/:id', checkToken, taskConttroller.deleteTask);
 

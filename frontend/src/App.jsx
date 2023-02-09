@@ -1,6 +1,8 @@
 import { Router } from './routes/Routes';
 import AppProvider from './context/AppProvider';
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,6 +17,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AppProvider>
         <Router />
+        <ToastContainer />
       </AppProvider>
     </QueryClientProvider>
   );
