@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import UserController from '../controllers/userController';
-import validInputs from '../middlewares/validator';
+import validInputs from '../middlewares/validateJoi';
 import { userValidation, login } from '../middlewares/schema/userValidate';
 
 const router = Router();
