@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { userRegister } from '../../services/userApi';
 
 export function Register() {
-  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -24,25 +25,16 @@ export function Register() {
 
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message)
+        setError(error.response.data.message)
+        console.log(error.response)
       };
     };
   };
 
   return (
     <div>
-      <header>
-        <div>
-          <span
-            className="login"
-            onClick={ () => navigate('/login') }
-          >
-          ⇦ Login
-          </span>
-        </div>
-        <h3>Faça seu cadastro</h3>
-      </header>
       <div>
+        <h3>Faça seu cadastro</h3>
         <form>
           <div>
             <label htmlFor="name">NOME</label>
@@ -54,6 +46,7 @@ export function Register() {
               onChange={ ({ target }) => setName(target.value) }
               required
               />
+            {error && error === 'O campo nome não pode ser vazio.' && <span>{error}</span>}
             <label htmlFor="lastName">SOBRENOME</label>
             <input
               id="lastName"
@@ -63,6 +56,7 @@ export function Register() {
               onChange={ ({ target }) => setLastName(target.value) }
               required
               />
+            {error && error === 'O campo sobrenome não pode ser vazio.' && <span>{error}</span>}
             <label htmlFor="email">EMAIL</label>
             <input
               id="email"
@@ -72,6 +66,7 @@ export function Register() {
               onChange={ ({ target }) => setEmail(target.value) }
               required
             />
+            {error && error === 'O campo sobrenome não pode ser vazio.' && <span>{error}</span>}
             <label htmlFor="password">SENHA</label>
             <input
               id="password"
@@ -84,11 +79,16 @@ export function Register() {
           </div>
           <div className="container-btn">
             <button
-              className="btn-register"
               type="submit"
               onClick={ (e) => handleRegister(e) }
             >
               CADASTRAR
+            </button>
+            <button
+              type='button'
+              onClick={() => navigate('/login')}
+            >
+              VOLTAR
             </button>
           </div>
         </form>
