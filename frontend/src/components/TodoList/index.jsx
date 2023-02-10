@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { toast } from "react-toastify";
-import { getTasks, createTask, removeTask } from '../../services/taskApi';
+import { getTasks, createTask } from '../../services/taskApi';
 import { useQuery, useMutation, useQueryClient} from 'react-query'
 import { FiTrash2, FiEdit } from 'react-icons/fi';
 import { ModalEditTask } from '../ModalEditTask';
+import { ModalDeleteTask } from '../../ModalDeleteTask';
 
 export function TodoList() {
   const [inputText, setInputText] = useState('');
+  const [error, setError] = useState('');
   const [isOpenModal, setIsOpenModal] = useState({
     open: false,
-    id: null
+    id: null,
+    task: '',
   });
+  const [isOpenModalDelete, setIsOpenModalDelete] = useState({open: false, id: null})
 
   const queryClient = useQueryClient();
 
@@ -19,7 +23,7 @@ export function TodoList() {
   );
 
   function notifyAdded() {
-    toast.success("task added!", {
+    toast.success("Tarefa adicionada com sucesso!", {
       icon: true,
       theme: "dark",
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -27,44 +31,36 @@ export function TodoList() {
     });
   }
 
-  function notifyDeleted() {
-    toast.error("task deleted!", {
-      icon: true,
-      theme: "dark",
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 1000,
-    });
+  async function handleCreateTask(inputText) {
+    const newTask =  await createTask(inputText)
+
+    return newTask;
   }
 
-  async function handleDeleteTask (id) {
-    await removeTask(id);
-  }
-
-  const { mutate: handleCreateTask } = useMutation(async () => {
-    try {
-      await createTask(inputText);
-    } catch (error) {
-      console.log(error);
-    } finally {
+  const { mutate: mutateCreateTask } = useMutation( handleCreateTask, {
+    onSuccess: () => {
       queryClient.invalidateQueries("tasks");
       setInputText('');
-      notifyAdded()
+      setError('');
+      notifyAdded();
+    },
+    onError: (error) => {
+      if (error.message) {
+        setError(error.response.data.message);
+      }
     }
   })
 
-  const { mutate: deleteTask } = useMutation(handleDeleteTask, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("tasks");
-        notifyDeleted();
-      },
-      onError: (error) => {
-        console.log(error.message)
-      }
-    }
-  );
-
   return (
     <div>
+      <ModalEditTask
+        openModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+      />
+      <ModalDeleteTask
+        openModalDelete={isOpenModalDelete}
+        setIsOpenModalDelete={setIsOpenModalDelete}
+      />
       <div>
         <input
           id="todo-input"
@@ -73,9 +69,10 @@ export function TodoList() {
           value={ inputText }
           onChange={ ({ target }) => setInputText(target.value) }
         />
+        <span>{error}</span>
         <button
           type="button"
-          onClick={handleCreateTask}
+          onClick={ () => mutateCreateTask(inputText) }
         >
           ADICIONAR
         </button>
@@ -92,11 +89,11 @@ export function TodoList() {
                 </li>
                 <FiEdit
                   onClick={() => {
-                    setIsOpenModal({ open: true, id: task.id })
+                    setIsOpenModal({ open: true, id: task.id, task: task.task })
                   }}
                 />
                 <FiTrash2
-                  onClick={() => deleteTask(task.id)}
+                  onClick={() => setIsOpenModalDelete({open: true, id: task.id,})}
                 />
               </div>
             )
@@ -105,10 +102,6 @@ export function TodoList() {
           }
         </ul>
       </div>
-      <ModalEditTask
-        openModal={isOpenModal}
-        setIsOpenModal={setIsOpenModal}
-      />
     </div>
   );
 }
