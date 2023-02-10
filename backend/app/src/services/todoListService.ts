@@ -23,7 +23,7 @@ export default class TodoListService {
   public updateTask = async (taskId: number, task: string) => {
     const getTask = await this.todoListModel.findtask(taskId);
 
-    if(!getTask) throw new NotFoundError('Task not found!');
+    if(!getTask) throw new NotFoundError('Tarefa não encontrada!');
 
     const upTask = await this.todoListModel.updateTask(taskId, task);
 
@@ -34,7 +34,7 @@ export default class TodoListService {
   public deleteTask = async (taskId: number) => {
     const task = await this.todoListModel.findtask(taskId);
 
-    if(!task) throw new NotFoundError('Task not found!');
+    if(!task) throw new NotFoundError('Tarefa não encontrada!');
 
     const removeTask = await this.todoListModel.deleteTask(taskId);
 

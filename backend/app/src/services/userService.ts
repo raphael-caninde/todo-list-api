@@ -13,7 +13,7 @@ export default class UserService {
   public createUser = async (name: string, lastName: string, email: string, password: string) => {
     const userExist = await this.userModel.findUser(email);
 
-    if(userExist) throw new BadRequestError('Email already exists!');
+    if(userExist) throw new BadRequestError('E-mail ja existe!');
 
     const salt = await bcrypt.genSalt(10);
 	  const passwordHash = await bcrypt.hash(password, salt);
@@ -22,7 +22,7 @@ export default class UserService {
       name,
       lastName,
       email,
-      password= passwordHash,
+      password = passwordHash,
     );
 
     return create;
@@ -31,11 +31,11 @@ export default class UserService {
   public userLogin = async (email: string, password: string) => {
     const user = await this.userModel.findUser(email);
 
-    if(!user) throw new BadRequestError('Your email and/or password are invalid');
+    if(!user) throw new BadRequestError('Seu e-mail e/ou senha são inválidos!');
 
     const passwordValid = bcrypt.compareSync(password, user.password);
 
-    if(!passwordValid) throw new BadRequestError('Your email and/or password are invalid');
+    if(!passwordValid) throw new BadRequestError('Seu e-mail e/ou senha são inválidos');
 
     const token = tokenGenerate(user.id, email);
 
