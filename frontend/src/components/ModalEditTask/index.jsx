@@ -5,13 +5,15 @@ import { useMutation, useQueryClient } from 'react-query';
 import { updateTask } from '../../services/taskApi';
 import { toast } from 'react-toastify';
 
-export function ModalEditTask({ openModal: { open, id }, setIsOpenModal }) {
+export function ModalEditTask({ openModal: { open, id, task }, setIsOpenModal }) {
   const [inputText, setInputText] = useState('');
+  const [error, setError] = useState('');
+
 
   const queryClient = useQueryClient();
 
   function notifyEdit() {
-    toast.success("successfully edited task!", {
+    toast.success("Tarefa editada com sucesso!", {
       icon: true,
       theme: "dark",
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -27,17 +29,21 @@ export function ModalEditTask({ openModal: { open, id }, setIsOpenModal }) {
 
   const { mutate: editTask} = useMutation(handleEditTask, {
     onSuccess: () => {
-      queryClient.invalidateQueries('tasks')
-      setInputText('')
+      queryClient.invalidateQueries('tasks');
+      setIsOpenModal(oldState => ({...oldState, task: inputText}))
+      setInputText('');
+      setError('');
       notifyEdit();
     },
     onError: (error) => {
-      console.log(error.message)
+      if (error.message) {
+        setError(error.response.data.message);
+      }
     }
   });
 
   function handleCloseModal() {
-    setIsOpenModal({ open: false, id: null })
+    setIsOpenModal({ open: false, id: null, task: '' })
   }
 
   return (
@@ -51,12 +57,16 @@ export function ModalEditTask({ openModal: { open, id }, setIsOpenModal }) {
       />
 
       <div className="">
+        <div>
+          <h3>{ task }</h3>
+        </div>
         <input
           type="text"
           value={ inputText }
           name='textInput'
           onChange={({ target }) => setInputText(target.value)}
         />
+        <span>{error}</span>
         <button
           type='button'
           onClick={() => editTask({ id, inputText })}
