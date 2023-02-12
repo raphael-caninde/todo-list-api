@@ -27,12 +27,11 @@ export default class TodoListModel {
     return list;
   };
 
-  public createTask = async (id: number, task: string, done: boolean) => {
+  public createTask = async (id: number, task: string) => {
     const newTask = await this.prisma.todoList.create({
       data: {
         userId: id,
         task,
-        done,
       },
     });
 

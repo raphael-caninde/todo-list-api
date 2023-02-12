@@ -14,8 +14,8 @@ export default class TodoListService {
     return list;
   };
 
-  public createTask = async (id: number, task: string, done: boolean) => {
-    const newTask = await this.todoListModel.createTask(id, task, done);
+  public createTask = async (id: number, task: string) => {
+    const newTask = await this.todoListModel.createTask(id, task);
 
     return newTask;
   };
