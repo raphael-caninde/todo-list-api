@@ -18,6 +18,12 @@ export const updateTask = async (taskId, task) => {
   return upTask;
 };
 
+export const taskDone = async (taskId, done) => {
+  const isDone = await api.patch(`/task/done/${taskId}`, { done });
+
+  return isDone
+}
+
 export const removeTask = async (taskId) => {
   const deleteTask = await api.delete(`/task/${taskId}`);
 

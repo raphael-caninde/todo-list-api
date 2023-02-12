@@ -2,7 +2,7 @@ import ReactModal from "react-modal";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { removeTask } from "../services/taskApi";
+import { removeTask } from "../../services/taskApi";
 
 export function ModalDeleteTask({openModalDelete: {open, id}, setIsOpenModalDelete}) {
   const queryClient = useQueryClient();

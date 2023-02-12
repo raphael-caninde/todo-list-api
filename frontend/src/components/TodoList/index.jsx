@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { toast } from "react-toastify";
-import { getTasks, createTask } from '../../services/taskApi';
+import { getTasks, createTask, taskDone } from '../../services/taskApi';
 import { useQuery, useMutation, useQueryClient} from 'react-query'
 import { FiTrash2, FiEdit } from 'react-icons/fi';
 import { ModalEditTask } from '../ModalEditTask';
-import { ModalDeleteTask } from '../../ModalDeleteTask';
+import { ModalDeleteTask } from '../ModalDeleteTask';
 
 export function TodoList() {
   const [inputText, setInputText] = useState('');
@@ -37,6 +37,12 @@ export function TodoList() {
     return newTask;
   }
 
+  async function handleTaskDone({ taskId, done }) {
+    const isDone = await taskDone(taskId, done);
+
+    return isDone;
+  }
+
   const { mutate: mutateCreateTask } = useMutation( handleCreateTask, {
     onSuccess: () => {
       queryClient.invalidateQueries("tasks");
@@ -48,6 +54,12 @@ export function TodoList() {
       if (error.message) {
         setError(error.response.data.message);
       }
+    }
+  })
+
+  const { mutate: mutateTaskDone } = useMutation(handleTaskDone, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("tasks");
     }
   })
 
@@ -69,7 +81,7 @@ export function TodoList() {
           value={ inputText }
           onChange={ ({ target }) => setInputText(target.value) }
         />
-        <span>{error}</span>
+        <span>{ error }</span>
         <button
           type="button"
           onClick={ () => mutateCreateTask(inputText) }
@@ -83,9 +95,14 @@ export function TodoList() {
             tasks?.data.list.length ?
             tasks.data.list.map((task) => {
             return (
-              <div key={task.id}>
+              <div key={ task.id }>
+                <input
+                  type="checkbox"
+                  checked={ task.done }
+                  onChange={({ target }) => mutateTaskDone({ taskId: task.id, done: target.checked })}
+                />
                 <li>
-                  {task.task}
+                  { task.task }
                 </li>
                 <FiEdit
                   onClick={() => {
@@ -93,7 +110,7 @@ export function TodoList() {
                   }}
                 />
                 <FiTrash2
-                  onClick={() => setIsOpenModalDelete({open: true, id: task.id,})}
+                  onClick={() => setIsOpenModalDelete({open: true, id: task.id })}
                 />
               </div>
             )
