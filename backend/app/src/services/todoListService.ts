@@ -14,8 +14,8 @@ export default class TodoListService {
     return list;
   };
 
-  public createTask = async (id: number, task: string) => {
-    const newTask = await this.todoListModel.createTask(id, task);
+  public createTask = async (id: number, task: string, done: boolean) => {
+    const newTask = await this.todoListModel.createTask(id, task, done);
 
     return newTask;
   };
@@ -29,6 +29,12 @@ export default class TodoListService {
 
 
     return upTask;
+  }
+
+  public taskDone = async (taskId: number, done: boolean) => {
+    const task = await this.todoListModel.taskDone(taskId, done);
+
+    return task;
   }
 
   public deleteTask = async (taskId: number) => {

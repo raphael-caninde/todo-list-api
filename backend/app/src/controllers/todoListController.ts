@@ -23,9 +23,9 @@ export default class TodoListController {
   public createTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
       const id = req.user!.id;
-      const { task } = req.body;
+      const { task, done } = req.body;
 
-      const newTask = await this.todoListService.createTask(id, task);
+      const newTask = await this.todoListService.createTask(id, task, done);
 
       return res.status(201).json(newTask);
     } catch (error) {
@@ -41,6 +41,20 @@ export default class TodoListController {
       const upTask = await this.todoListService.updateTask(+id, task);
 
       return res.status(200).json(upTask);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public taskDone = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+    try {
+      const { id } = req.params;
+      const { done } = req.body;
+
+      const task = await this.todoListService.taskDone(+id, done);
+
+      return res.status(200).json(task);
+
     } catch (error) {
       next(error);
     }

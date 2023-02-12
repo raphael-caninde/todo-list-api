@@ -18,6 +18,7 @@ export default class TodoListModel {
           select: {
             id: true,
             task: true,
+            done: true,
           },
         },
       },
@@ -26,11 +27,12 @@ export default class TodoListModel {
     return list;
   };
 
-  public createTask = async (id: number, task: string) => {
+  public createTask = async (id: number, task: string, done: boolean) => {
     const newTask = await this.prisma.todoList.create({
       data: {
         userId: id,
         task,
+        done,
       },
     });
 
@@ -47,6 +49,19 @@ export default class TodoListModel {
 
     return upTask;
   };
+
+  public taskDone = async (taskId: number, done: boolean) => {
+    const task = await this.prisma.todoList.update({
+      where: {
+        id: taskId
+      },
+      data: {
+        done,
+      }
+    })
+
+    return task;
+  }
 
   public deleteTask = async (taskId: number) => {
     const removeTask = await this.prisma.todoList.delete({
