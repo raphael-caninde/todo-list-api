@@ -42,6 +42,12 @@ export function ModalEditTask({ openModal: { open, id, task }, setIsOpenModal })
     }
   });
 
+  function handleKeyUp(e) {
+    if (e.keyCode === 13) {
+      editTask({id, inputText});
+    }
+  }
+
   function handleCloseModal() {
     setIsOpenModal({ open: false, id: null, task: '' })
   }
@@ -65,13 +71,20 @@ export function ModalEditTask({ openModal: { open, id, task }, setIsOpenModal })
           value={ inputText }
           name='textInput'
           onChange={({ target }) => setInputText(target.value)}
+          onKeyUp={handleKeyUp}
         />
         <span>{error}</span>
         <button
           type='button'
           onClick={() => editTask({ id, inputText })}
         >
-          Adicionar
+          ADICIONAR
+        </button>
+        <button
+          type='button'
+          onClick={() => handleCloseModal()}
+        >
+          CANCELAR
         </button>
       </div>
     </ReactModal>

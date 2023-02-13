@@ -31,6 +31,12 @@ export function TodoList() {
     });
   }
 
+  function handleKeyUp(e) {
+    if (e.keyCode === 13) {
+      mutateCreateTask(inputText);
+    }
+  }
+
   async function handleCreateTask(inputText) {
     const newTask =  await createTask(inputText)
 
@@ -80,6 +86,7 @@ export function TodoList() {
           name="input-text"
           value={ inputText }
           onChange={ ({ target }) => setInputText(target.value) }
+          onKeyUp={ handleKeyUp }
         />
         <span>{ error }</span>
         <button
