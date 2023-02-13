@@ -8,7 +8,7 @@ export function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  console.log(error)
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -26,7 +26,6 @@ export function Register() {
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message)
-        console.log(error.response)
       };
     };
   };
@@ -37,7 +36,7 @@ export function Register() {
         <h3>Faça seu cadastro</h3>
         <form>
           <div>
-            <label htmlFor="name">NOME</label>
+            <label htmlFor="name">NOME*</label>
             <input
               id="name"
               type="text"
@@ -46,8 +45,7 @@ export function Register() {
               onChange={ ({ target }) => setName(target.value) }
               required
               />
-            {error && error === 'O campo nome não pode ser vazio.' && <span>{error}</span>}
-            <label htmlFor="lastName">SOBRENOME</label>
+            <label htmlFor="lastName">SOBRENOME*</label>
             <input
               id="lastName"
               type="text"
@@ -56,8 +54,7 @@ export function Register() {
               onChange={ ({ target }) => setLastName(target.value) }
               required
               />
-            {error && error === 'O campo sobrenome não pode ser vazio.' && <span>{error}</span>}
-            <label htmlFor="email">EMAIL</label>
+            <label htmlFor="email">EMAIL*</label>
             <input
               id="email"
               type="email"
@@ -66,8 +63,7 @@ export function Register() {
               onChange={ ({ target }) => setEmail(target.value) }
               required
             />
-            {error && error === 'O campo sobrenome não pode ser vazio.' && <span>{error}</span>}
-            <label htmlFor="password">SENHA</label>
+            <label htmlFor="password">SENHA*</label>
             <input
               id="password"
               type="password"
