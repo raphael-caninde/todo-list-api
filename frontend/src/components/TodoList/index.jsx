@@ -108,7 +108,9 @@ export function TodoList() {
                   checked={ task.done }
                   onChange={({ target }) => mutateTaskDone({ taskId: task.id, done: target.checked })}
                 />
-                <li>
+                <li
+                  className={`${task.done ? 'line-through' : 'no-underline'}`}
+                >
                   { task.task }
                 </li>
                 <FiEdit

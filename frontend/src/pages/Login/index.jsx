@@ -9,7 +9,7 @@ import caderno from '../../assets/images/caderno.png'
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [, setError] = useState('');
   const {setToken, setUser} = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -43,14 +43,18 @@ export function Login() {
   };
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 md:h-screen md:w-screen'>
-      <div className='bg-indigo-900 flex flex-col items-center text-white text-7xl'>
-        <img src={caderno} alt="imagem-caderno" />
-        <h1>Lista de tarefas</h1>
+    <div className='grid grid-cols-1 md:grid-cols-2 ease-in-out duration-100 h-screen w-screen'>
+      <div className='bg-indigo-900 flex flex-col justify-center items-center text-white text-7xl'>
+        <img
+          className='hidden md:w-[420px] md:block  md:-mt-40'
+          src={ caderno }
+          alt="imagem-caderno"
+        />
+        <h1 className='px-2 pb-3 font-semibold tracking-widest font-bangers text-5xl text-center md:text-6xl'>Lista de tarefas</h1>
       </div>
       <div className='flex justify-center items-center bg-zinc-100 p-5'>
-        <div className="w-96 shadow-xl">
-          <div class="relative h-48 rounded-md bg-indigo-900">
+        <div className="flex flex-col w-96 shadow-xl">
+          <div class="relative h-40 rounded-md bg-indigo-900">
             <svg class="absolute bottom-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
               <path fill="#fff" fill-opacity="1" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,122.7C960,160,1056,224,1152,245.3C1248,267,1344,245,1392,234.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
               </path>
@@ -94,14 +98,14 @@ export function Login() {
             </div>
             <div className='mb-6'>
               <button
-                className="bg-green-500 w-full p-2 rounded-lg text-white text-lg font-semibold hover:bg-green-600"
+                className="bg-green-500 w-full p-2 rounded-lg text-white text-lg font-semibold hover:bg-green-600 hover:ease-in-out duration-300"
                 type="submit"
                 onClick={ (e) => handleSubmit(e) }
               >
                 ENTRAR
               </button>
             </div>
-            <div className="relative mb-6">
+            <div className="relative mb-8">
               <a
                 className='absolute right-4 -top-2 underline underline-offset-1 hover:text-red-500'
                 href='/cadastro'
