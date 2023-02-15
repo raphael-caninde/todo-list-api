@@ -5,12 +5,16 @@ import { requestLogin } from '../../services/userApi';
 import AppContext from '../../context/AppContext';
 import { api } from '../../services/axiosService';
 import caderno from '../../assets/images/caderno.png'
+import { ShowPassword } from '../../components/ShowPassword';
 
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [, setError] = useState('');
   const {setToken, setUser} = useContext(AppContext);
+  const [iconEye, inputType] = ShowPassword();
+
+
   const navigate = useNavigate();
 
   const login = async (email, password) => {
@@ -54,14 +58,14 @@ export function Login() {
       </div>
       <div className='flex justify-center items-center bg-zinc-100 p-5'>
         <div className="flex flex-col w-96 shadow-xl">
-          <div class="relative h-40 rounded-md bg-indigo-900">
-            <svg class="absolute bottom-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <path fill="#fff" fill-opacity="1" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,122.7C960,160,1056,224,1152,245.3C1248,267,1344,245,1392,234.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+          <div className="relative h-40 rounded-md bg-indigo-900">
+            <svg className="absolute bottom-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+              <path fill="#fff" fillOpacity="1" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,122.7C960,160,1056,224,1152,245.3C1248,267,1344,245,1392,234.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
               </path>
             </svg>
           </div>
           <form className="flex flex-col rounded-md px-3 bg-white">
-            <h1 className="text-3xl text-center font-semibold mb-5">Faça seu login</h1>
+            <h1 className="text-3xl text-center font-semibold mb-5">FAZER LOGIN</h1>
             <div className='relative mb-6'>
               <input
                 className='peer rounded-md w-full p-4 border border-zinc-400 text-lg text-zinc-700 outline-none placeholder:bg-transparent placeholder-transparent left-4 focus:bg-white focus:border-1 focus:border-indigo-500 bg-white'
@@ -83,7 +87,7 @@ export function Login() {
               <input
                 className='peer rounded-md w-full p-4 border border-zinc-400 text-lg text-zinc-700 outline-none placeholder:bg-transparent placeholder-transparent focus:bg-white focus:border-1 focus:border-indigo-500 bg-white'
                 id="password"
-                type="password"
+                type={inputType}
                 name="password"
                 value={ password }
                 onChange={ ({ target }) => setPassword(target.value) }
@@ -95,6 +99,7 @@ export function Login() {
                 htmlFor="password">
                 Senha*
               </label>
+              <span>{ iconEye }</span>
             </div>
             <div className='mb-6'>
               <button
@@ -105,12 +110,12 @@ export function Login() {
                 ENTRAR
               </button>
             </div>
-            <div className="relative mb-8">
-              <a
-                className='absolute right-4 -top-2 underline underline-offset-1 hover:text-red-500'
-                href='/cadastro'
-              >
-                Crie sua conta!
+            <div className="flex justify-center gap-1 mb-8">
+              <span>
+                Ainda não tem conta?
+              </span>
+              <a className='text-red-500 font-semibold underline underline-offset-1' href='/cadastro'>
+                Cadastre-se!
               </a>
             </div>
           </form>
