@@ -110,6 +110,14 @@ export function Register() {
             </label>
             <span>{ iconEye }</span>
           </div>
+          {
+            error &&
+            <span
+              className='text-red-500 text-center font-medium'
+            >
+              {error}
+            </span>
+          }
           <div className="flex justify-center gap-5 w-full">
             <button
               className='bg-zinc-400 hover:bg-zinc-500 text-white font-semibold py-2 px-7 rounded-lg hover:ease-in-out duration-300'

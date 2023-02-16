@@ -10,10 +10,9 @@ import { ShowPassword } from '../../components/ShowPassword';
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [, setError] = useState('');
+  const [error, setError] = useState('');
   const {setToken, setUser} = useContext(AppContext);
   const [iconEye, inputType] = ShowPassword();
-
 
   const navigate = useNavigate();
 
@@ -64,9 +63,9 @@ export function Login() {
               </path>
             </svg>
           </div>
-          <form className="flex flex-col rounded-md px-3 bg-white">
-            <h1 className="text-3xl text-center font-semibold mb-5">FAZER LOGIN</h1>
-            <div className='relative mb-6'>
+          <form className="flex flex-col items-center rounded-md px-3 bg-white">
+            <h1 className="w-full text-3xl text-center font-semibold mb-5">FAZER LOGIN</h1>
+            <div className='relative mb-6 w-full'>
               <input
                 className='peer rounded-md w-full p-4 border border-zinc-400 text-lg text-zinc-700 outline-none placeholder:bg-transparent placeholder-transparent left-4 focus:bg-white focus:border-1 focus:border-indigo-500 bg-white'
                 id="email"
@@ -83,7 +82,7 @@ export function Login() {
                 Email*
               </label>
             </div>
-            <div className='relative mb-6'>
+            <div className='relative mb-6 w-full'>
               <input
                 className='peer rounded-md w-full p-4 border border-zinc-400 text-lg text-zinc-700 outline-none placeholder:bg-transparent placeholder-transparent focus:bg-white focus:border-1 focus:border-indigo-500 bg-white'
                 id="password"
@@ -101,7 +100,15 @@ export function Login() {
               </label>
               <span>{ iconEye }</span>
             </div>
-            <div className='mb-6'>
+            {
+              error &&
+              <span
+                className='text-red-500 font-medium mb-6'
+              >
+                {error}
+              </span>
+            }
+            <div className='mb-6 w-full'>
               <button
                 className="bg-green-500 w-full p-2 rounded-lg text-white text-lg font-semibold hover:bg-green-600 hover:ease-in-out duration-300"
                 type="submit"
@@ -110,7 +117,7 @@ export function Login() {
                 ENTRAR
               </button>
             </div>
-            <div className="flex justify-center gap-1 mb-8">
+            <div className="flex justify-center w-full gap-1 mb-8">
               <span>
                 Ainda não tem conta?
               </span>
