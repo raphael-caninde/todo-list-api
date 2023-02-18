@@ -70,7 +70,7 @@ export function TodoList() {
   })
 
   return (
-    <div>
+    <main className='flex flex-col items-center gap-2 w-full h-[91.2%] bg-zinc-100'>
       <ModalEditTask
         openModal={isOpenModal}
         setIsOpenModal={setIsOpenModal}
@@ -79,8 +79,9 @@ export function TodoList() {
         openModalDelete={isOpenModalDelete}
         setIsOpenModalDelete={setIsOpenModalDelete}
       />
-      <div>
+      <div className='mt-8 border border-red-500'>
         <input
+          className='border mr-2 border-gray-400'
           id="todo-input"
           type="text"
           name="input-text"
@@ -88,15 +89,18 @@ export function TodoList() {
           onChange={ ({ target }) => setInputText(target.value) }
           onKeyUp={ handleKeyUp }
         />
-        <span>{ error }</span>
         <button
+          className='bg-pink-500'
           type="button"
           onClick={ () => mutateCreateTask(inputText) }
-        >
+          >
           ADICIONAR
         </button>
       </div>
-      <div>
+      <span className='text-red-600'>
+        { error }
+      </span>
+      <div className='border-2 border-green-600'>
         <ul>
           {
             tasks?.data.list.length ?
@@ -128,6 +132,6 @@ export function TodoList() {
           }
         </ul>
       </div>
-    </div>
+    </main>
   );
 }
