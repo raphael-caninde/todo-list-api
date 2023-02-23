@@ -79,9 +79,9 @@ export function TodoList() {
         openModalDelete={isOpenModalDelete}
         setIsOpenModalDelete={setIsOpenModalDelete}
       />
-      <div className='mt-8 border border-red-500'>
+      <div className='flex gap-3 mt-8 border border-red-500'>
         <input
-          className='border mr-2 border-gray-400'
+          className='border border-gray-400'
           id="todo-input"
           type="text"
           name="input-text"
@@ -100,13 +100,13 @@ export function TodoList() {
       <span className='text-red-600'>
         { error }
       </span>
-      <div className='border-2 border-green-600'>
+      <div className='flex w-[40rem] border-2 border-green-600'>
         <ul>
           {
             tasks?.data.list.length ?
             tasks.data.list.map((task) => {
             return (
-              <div key={ task.id }>
+              <div className='flex' key={ task.id }>
                 <input
                   type="checkbox"
                   checked={ task.done }
