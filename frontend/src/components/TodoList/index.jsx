@@ -79,56 +79,66 @@ export function TodoList() {
         openModalDelete={isOpenModalDelete}
         setIsOpenModalDelete={setIsOpenModalDelete}
       />
-      <div className='flex gap-3 mt-8 border border-red-500'>
+      <div className='flex justify-center gap-5 mt-8 w-[35rem]'>
         <input
-          className='border border-gray-400'
+          className='flex-1 p-2 border text-lg outline-none rounded-sm border-gray-400'
           id="todo-input"
           type="text"
           name="input-text"
           value={ inputText }
+          placeholder='Digite uma tarefa...'
           onChange={ ({ target }) => setInputText(target.value) }
           onKeyUp={ handleKeyUp }
         />
         <button
-          className='bg-pink-500'
+          className='px-6 rounded-lg text-white font-semibold bg-green-500'
           type="button"
           onClick={ () => mutateCreateTask(inputText) }
           >
-          ADICIONAR
+          Adicionar
         </button>
       </div>
-      <span className='text-red-600'>
+      <span className='py-2 text-red-600'>
         { error }
       </span>
-      <div className='flex w-[40rem] border-2 border-green-600'>
-        <ul>
+      <div className='flex flex-col w-[40rem] h-[40rem] p-3 overflow-y-scroll'>
+        <ul className='flex flex-col items-center w-full h-full'>
           {
             tasks?.data.list.length ?
             tasks.data.list.map((task) => {
             return (
-              <div className='flex' key={ task.id }>
+              <div className='flex w-full justify-around items-center break-words p-3 my-2 bg-zinc-300 rounded-md shadow-lg' key={ task.id }>
                 <input
+                  className='mr-3 h-6 w-6 cursor-pointer'
                   type="checkbox"
                   checked={ task.done }
                   onChange={({ target }) => mutateTaskDone({ taskId: task.id, done: target.checked })}
                 />
-                <li
-                  className={`${task.done ? 'line-through' : 'no-underline'}`}
+                <p
+                  className={`${task.done ? 'line-through' : 'no-underline'} flex-1 text-xl`}
                 >
                   { task.task }
-                </li>
-                <FiEdit
-                  onClick={() => {
-                    setIsOpenModal({ open: true, id: task.id, task: task.task })
-                  }}
-                />
-                <FiTrash2
-                  onClick={() => setIsOpenModalDelete({open: true, id: task.id })}
-                />
+                </p>
+                <div className='flex gap-4 ml-3'>
+                  <FiEdit
+                    className='cursor-pointer bg-blue-500 text-white w-8 h-7 rounded-md'
+                    size={25}
+                    onClick={() => {
+                      setIsOpenModal({ open: true, id: task.id, task: task.task })
+                    }}
+                  />
+                  <FiTrash2
+                    className='cursor-pointer bg-red-500 text-white w-8 h-7 rounded-md'
+                    size={25}
+                    onClick={() => setIsOpenModalDelete({open: true, id: task.id })}
+                  />
+                </div>
               </div>
             )
           }) :
-            <span>Adicione uma tarefa!</span>
+            <span className='text-xl font-medium'>
+              Adicione uma tarefa!
+            </span>
           }
         </ul>
       </div>
