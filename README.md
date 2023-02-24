@@ -1,20 +1,22 @@
 # Todo List Api
 
-# CONFIGURAÇÃO NO FRONTEND
+![projeto](https://user-images.githubusercontent.com/69723773/221297427-1e833837-6fbf-4cfd-adb2-2e7b228ef533.gif)
+
+## CONFIGURAÇÃO NO FRONTEND
 
  - Navegue pelo terminal da pasta raiz do projeto para a pasta frontend
  - Digite `npm install` para instalar as dependências do projeto
- - Digite `npm start` para iniciar o projeto
+ - Digite `npm run dev` para iniciar o projeto
  - Por padrão, o projeto será executado na porta 3000
  
- # CONFIGURAÇÃO NO BACKEND
+ ## CONFIGURAÇÃO NO BACKEND
  
  - Navegue pelo terminal da pasta raiz do projeto para a pasta backend/app
  - Digite `npm install` para instalar as dependências do projeto
  - Digite `npm run dev` para iniciar o projeto localmente
  - Por padrão, o projeto será executado na porta 3001
  
-# Iniciando o projeto com Docker 🐳
+## Iniciando o projeto com Docker 🐳
  
   - Navegue pelo terminal da pasta raiz do projeto para a pasta backend/app
   - Digite o comando `npm run compose:up:dev`
