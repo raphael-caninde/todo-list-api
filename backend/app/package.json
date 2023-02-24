@@ -7,7 +7,7 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "prestart": "npm run build",
     "start": "nodemon ./dist/server.js",
-    "predev": "npm run build",
+    "predev": "npm run build && npm run db:reset",
     "dev": "ts-node-dev --respawn --transpile-only --watch ./src/**/* ./src/server.ts",
     "db:reset": "npx prisma migrate reset --force --skip-generate",
     "compose:up:dev": "(cd ../.. && docker-compose -f docker-compose.yml up -d --build)",
