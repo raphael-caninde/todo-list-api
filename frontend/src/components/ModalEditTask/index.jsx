@@ -91,7 +91,7 @@ export function ModalEditTask({ openModal: { open, id, task }, setIsOpenModal })
             type='button'
             onClick={() => editTask({ id, inputText })}
           >
-            Adicionar
+            Salvar
           </button>
         </div>
       </div>
