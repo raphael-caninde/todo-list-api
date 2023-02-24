@@ -1,13 +1,12 @@
 # Todo List Api
 
-![2023-02-23-22-13-42](https://user-images.githubusercontent.com/69723773/221079255-3146e449-9268-4374-8364-7f2a2fc17690.gif)
-
+![projeto](https://user-images.githubusercontent.com/69723773/221297427-1e833837-6fbf-4cfd-adb2-2e7b228ef533.gif)
 
 ## CONFIGURAÇÃO NO FRONTEND
 
  - Navegue pelo terminal da pasta raiz do projeto para a pasta frontend
  - Digite `npm install` para instalar as dependências do projeto
- - Digite `npm start` para iniciar o projeto
+ - Digite `npm run dev` para iniciar o projeto
  - Por padrão, o projeto será executado na porta 3000
  
  ## CONFIGURAÇÃO NO BACKEND
