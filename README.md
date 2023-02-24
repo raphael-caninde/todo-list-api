@@ -1,5 +1,8 @@
 # Todo List Api
 
+![2023-02-23-22-13-42](https://user-images.githubusercontent.com/69723773/221079255-3146e449-9268-4374-8364-7f2a2fc17690.gif)
+
+
 ## CONFIGURAÇÃO NO FRONTEND
 
  - Navegue pelo terminal da pasta raiz do projeto para a pasta frontend
